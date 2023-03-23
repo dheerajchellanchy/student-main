@@ -333,8 +333,9 @@ def adminviewleavedetailed(request, pk):
         leav = Leave.objects.get(id=pk)
         date = leav.date
         days = leav.days
+        student = Parent.objects.get(user=leav.send_by).student
         for i in range(days):
-            date = date + timedelta(days=1)
+            date = date + datetime.timedelta(days=1)
             Attendance.objects.create(student=student, date=date, status='Leave')
         leav.status = "accepted"
         leav.view = "sendernotviewed"
@@ -504,6 +505,7 @@ def staffdelete(request, pk):
 def parentdelete(request, pk):
     Parent.objects.filter(id=pk).update(status='deleted')
     return redirect('viewparent')
+
 
 def teacherdelete(request, pk):
     Teacher.objects.filter(id=pk).update(status='deleted')

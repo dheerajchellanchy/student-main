@@ -1,0 +1,111 @@
+{% extends 'admindash.html'%}
+{% load static %}
+{% get_static_prefix as staticdir %}
+{% block content %}
+<section class="vh-100" style="background-color: rgb(170, 235, 238) ">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 15px; background-color: rgb(159, 234, 238) ">
+            <div class="card-body p-4 text-black">
+              <div>
+                <h4 class="mb-4">Request For Leave</h4>
+                <hr>
+                <div class="d-flex align-items-center justify-content-between mb-1">
+                  <b><h4>{{details.emp.name}}</h4></b>
+                  <!-- <p class="fw-bold mb-0">$90</p> -->
+                </div>
+              </div>
+              <div class="d-flex align-items-center mb-4">
+                <div class="flex-shrink-0">
+                  <img src="{{details.emp.profile_picture.url}}" alt="Generic placeholder image" class="img-fluid rounded-circle border border-dark border-3" style="width: 70px;">
+                </div>
+                <div class="flex-grow-1 ms-3">
+                  <div class="d-flex flex-row align-items-center mb-2">
+                   <!---- <p class="mb-0 me-2">@sheisme</p>-->
+                    <ul class="mb-0 list-unstyled d-flex flex-row" style="color: #1B7B2C;">
+                      <li>
+                        <i class="fas fa-star fa-xs"></i>
+                      </li>
+                      <li>
+                        <i class="fas fa-star fa-xs"></i>
+                      </li>
+                      <li>
+                        <i class="fas fa-star fa-xs"></i>
+                      </li>
+                      <li>
+                        <i class="fas fa-star fa-xs"></i>
+                      </li>
+                      <li>
+                        <i class="fas fa-star fa-xs"></i>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <button  class="btn btn-dark m-2">{{details.date}}</button>
+                <b>to</b>
+                    <button  class="btn btn-dark m-2" >{{details.days}}  days</button>
+        
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <h4>Reson For Leave</h4>
+              
+              <p class="my-4 pb-1">{{details.reson}}</p>
+              <hr>
+              {%if details.status == "declined"%}
+              <h4>Reson for Rejection</h4>
+              <p class="my-4 pb-1">{{details.adminreson}}</p>
+              {%endif%}
+              {%if details.status == 'requested'%}
+              <div style="float: right;">
+                <form action="" method="POST"> {% csrf_token %}
+              <button type="submit" class="btn btn-success btn-rounded  ml-5">Accept</button>
+              <button type="button" class="btn btn-danger btn-rounded m-3" data-bs-toggle="modal"
+              data-bs-target="#default">Decline</button>
+            </form>
+           
+              
+              <div class="modal fade text-left" id="default" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered " role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="myModalLabel1">Reson For Rejection </h5>
+                                                    <button type="button" class="close rounded-pill"
+                                                        data-bs-dismiss="modal" aria-label="Close">
+                                                        <i data-feather="x"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                  <form action="adminviewleaverequest" method="POST">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" value="{{details.id}}" name="id">
+                                                  <textarea id="form7" class="md-textarea form-control" rows="3" name="reson"></textarea>
+                                                
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn" data-bs-dismiss="modal">
+                                                        <i class="bx bx-x d-block d-sm-none"></i>
+                                                        <span class="d-none d-sm-block">Close</span>
+                                                    </button>
+                                                    <button type="submit" class="btn btn-success ml-1">
+                                                        Sent
+                                                  </button>
+                                                </div>
+                                              </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {%endif%}
+            
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </section>
+{%endblock%}

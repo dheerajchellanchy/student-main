@@ -1,0 +1,299 @@
+{% load static %}
+{% get_static_prefix as staticdir %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{staticdir}}assets/dash/css/bootstrap.css">
+    <link rel="stylesheet" href="{{staticdir}}assets/dash/css/app.css">
+    <link rel="shortcut icon" href="{{staticdir}}assets/dash/images/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="{{staticdir}}assets/dash/vendors/perfect-scrollbar/perfect-scrollbar.css">
+</head>
+
+<body style="background-color: rgb(170, 235, 238);">
+    <div id="app">
+        <div id="sidebar" class='active'>
+            <div class="sidebar-wrapper active" style="background-color: rgb(197, 247, 219) !important;">
+                <div class="sidebar-header">
+                    <img src="{{staticdir}}assets/dash/images/nyestelogo.png" alt="" srcset="">
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        <li class='sidebar-title'>Main Menu</li>
+
+                        <li class="sidebar-item">
+                            <a href="admindash" class='sidebar-link'>
+                                <i data-feather="home" width="20"></i>
+                                <span>Dashboard</span>
+                            </a>
+
+                        </li>
+                        {% if request.user.profile.role == 'Admin' or  request.user.profile.role == 'Staff' or  request.user.profile.role == 'Superadmin'%}
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i data-feather="triangle" width="20"></i>
+                                <span>Student</span>
+                            </a>
+                            <ul class="submenu ">
+                                {% if request.user.profile.role == 'Admin' or request.user.profile.role == 'Staff'%}
+                                <li>
+                                    <a href="addstudent">Add New Student</a>
+                                </li>
+                                {% endif %}
+                                {% if request.user.profile.role == 'Admin' or request.user.profile.role == 'Teacher' or request.user.profile.role == 'Staff'%}
+                                <li>
+                                    <a href="viewstudent">View Student Details</a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                            {% endif %}
+                        </li>
+                        {% if request.user.profile.role == 'Admin' or request.user.profile.role == 'SuperAdmin' %}
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i data-feather="triangle" width="20"></i>
+                                <span>Staff mangement</span>
+                            </a>
+
+                            <ul class="submenu ">
+
+                                <li>
+                                    <a href="addstaff">Add New Staff</a>
+                                </li>
+
+                                <li>
+                                    <a href="viewstaff">View Staff Details</a>
+                                </li>
+                            </ul>
+                        </li>
+                        {% endif %}
+                        {% if request.user.profile.role == 'Admin' or request.user.profile.role == 'SuperAdmin'%}
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i data-feather="triangle" width="20"></i>
+                                <span>Teacher</span>
+                            </a>
+
+                            <ul class="submenu ">
+
+                                <li>
+                                    <a href="addteacher">Add New Teacher</a>
+                                </li>
+
+                                <li>
+                                    <a href="viewteacher">View Teacher Details</a>
+                                </li>
+                            </ul>
+                        </li>
+                        {% endif %}
+                        {% if request.user.profile.role == 'Admin' or request.user.profile.role == 'SuperAdmin'%}
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i data-feather="triangle" width="20"></i>
+                                <span>Parent</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li>
+                                    <a href="addparent">Add New Parent</a>
+                                </li>
+                                <li>
+                                    <a href="viewparent">View Parent Details</a>
+                                </li>
+                            </ul>
+                        </li>
+                        {% endif %}
+                        {% if request.user.profile.role == 'Admin' or request.user.profile.role == 'Staff' or request.user.profile.role == 'Student' or request.user.profile.role == 'Parent' or request.user.profile.role == 'SuperAdmin'%}
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i data-feather="triangle" width="20"></i>
+                                <span>Announcements</span>
+                            </a>
+
+                            <ul class="submenu ">
+                                {% if request.user.profile.role == 'Admin' or request.user.profile.role == 'Staff' %}
+                                <li>
+                                    <a href="addannouncement">Create Announcement</a>
+                                </li>
+                                {% endif %}
+                                {% if request.user.profile.role == 'Admin' or request.user.profile.role == 'Staff' or request.user.profile.role == 'Parent' or request.user.profile.role == 'Student'%}
+                                <li>
+                                    <a href="viewannouncement">View Announcement</a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                        {% endif %}
+                        {% if request.user.profile.role == 'Parent' or request.user.profile.role == 'Student'%}
+                        <li class="sidebar-item">
+                            <a href="{%url 'viewstudentmarksheet' request.user.id %}" class='sidebar-link'>
+                                <i data-feather="triangle" width="20"></i>
+                                <span>View Results</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                        {% if request.user.profile.role == 'Parent' or request.user.profile.role == 'Student'%}
+                        <li class="sidebar-item">
+                            <a href="{%url 'viewatn' %}" class='sidebar-link'>
+                                <i data-feather="triangle" width="20"></i>
+                                <span>View Attendance</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                       {% if request.user.profile.role == 'Admin' or request.user.profile.role == 'Teacher' or request.user.profile.role == 'Parent' %}
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i data-feather="triangle" width="20"></i>
+                                <span>Leave</span>
+                            </a>
+
+                            <ul class="submenu ">
+                                {% if request.user.profile.role == 'Parent' %}
+                                <li>
+                                    <a href="leave">Request Leave</a>
+                                </li>
+                                {% endif %}
+                                {% if request.user.profile.role == 'Admin' or request.user.profile.role == 'Teacher'%}
+                                <li>
+                                    <a href="adminviewleaverequest">View Leave Requests</a>
+                                </li>
+                                {% endif %}
+                                {% if request.user.profile.role == 'Admin' or request.user.profile.role == 'Parent' %}
+                                <li>
+                                    <a href="adminviewleavehistory">History</a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                        {% endif %}
+                        {% if request.user.profile.role == 'Admin' or request.user.profile.role == 'Teacher' or request.user.profile.role == 'Staff' %}
+                         <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i data-feather="triangle" width="20"></i>
+                                <span>Attendance</span>
+                            </a>
+                            <ul class="submenu ">
+                                {% if request.user.profile.role == 'Teacher' or request.user.profile.role == 'Staff' %}
+                                <li>
+                                    <a href="studentlistattendance">Add Attendance</a>
+                                </li>
+                                {% endif %}
+                                {% if request.user.profile.role == 'Admin' or request.user.profile.role == 'Teacher' or request.user.profile.role == 'Staff' %}
+                                <li>
+                                    <a href="listattendance">View Attendance</a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                        {% endif %}
+                        {% if request.user.profile.role == 'Admin' or request.user.profile.role == 'Teacher' %}
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i data-feather="triangle" width="20"></i>
+                                <span>Mark Sheet</span>
+                            </a>
+
+                            <ul class="submenu ">
+                                {% if request.user.profile.role == 'Teacher'%}
+                                <li>
+                                    <a href="addmarksheet">Add Result</a>
+                                </li>
+                                {% endif %}
+                                {% if request.user.profile.role == 'Admin' or request.user.profile.role == 'Teacher'%}
+                                <li>
+                                    <a href="viewallmarksheet">View Results</a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                        {% endif %}
+                        {% if request.user.profile.role == 'Teacher' or request.user.profile.role == 'Student'%}
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i data-feather="triangle" width="20"></i>
+                                <span>References</span>
+                            </a>
+
+                            <ul class="submenu ">
+                                {% if request.user.profile.role == 'Teacher' %}
+                                <li>
+                                    <a href="addreference">Add Reference</a>
+                                </li>
+                                {% endif %}
+                                {% if request.user.profile.role == 'Teacher' or request.user.profile.role == 'Student'%}
+                                <li>
+                                    <a href="viewreferences">View Reference</a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                    </ul>
+                    {% endif %}
+                </div>
+                <button class="sidebar-toggler btn x" style="background-color:rgb(197, 247, 219);"><i data-feather="x" style="color:rgb(17, 17, 17)">&#10060;</i></button>
+            </div>
+        </div>
+        <div id="main" style="background-color: rgb(170, 235, 238) !important;">
+            <nav class="navbar navbar-header navbar-expand navbar-light">
+                <a class="sidebar-toggler" href="#"><span class="navbar-toggler-icon"></span></a>
+                <button class="btn navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav d-flex align-items-center navbar-light ms-auto">
+                     
+                        <li class="dropdown">
+                            <a href="#" data-bs-toggle="dropdown"
+                                class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                                <div class="avatar me-1">
+                                    <img src="{{request.user.profile.profile_picture.url}}" alt="" srcset="">
+                                </div>
+                                <div class="d-none d-md-block d-lg-inline-block">Hi, {{request.user.first_name}}</div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+<!--                                <a class="dropdown-item" href="addadmin"><i data-feather="user"></i> Add Admin</a>-->
+<!--                                <a class="dropdown-item" href="adminupdateprofile"><i data-feather="user"></i> Update profile</a>-->
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="logout"><i data-feather="log-out"></i> Logout</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            {%if messages%}
+            {% for message in messages %}
+            {% if message.tags == "success"%}
+           <center> <h5 style="color: rgb(71, 255, 117);">{{message}}</h5>
+             
+           </center>
+           {%else%}
+           <center> <h5 style="color: rgb(255, 154, 71);">{{message}}</h5>
+             
+           </center>
+           {%endif%}
+           
+            {%endfor%}
+          {%endif%}
+    <script src="{{staticdir}}assets/dash/js/app.js"></script>
+
+    <script src="{{staticdir}}assets/dash/js/pages/dashboard.js"></script>
+
+    <script src="{{staticdir}}assets/dash/js/main.js"></script>
+    <script src="{{staticdir}}assets/dash/js/vendors.js"></script>
+    <script src="{{staticdir}}assets/vendors/chartjs/Chart.min.js"></script>
+    
+    <script src="{{staticdir}}assets/dash/pages/form-editor.js"></script>
+    <script src="{{staticdir}}assets/dash/pages/ui-apexchart.js"></script>
+    
+    <script src="{{staticdir}}assets/dash/pages/widgets.js"></script>
+    <script src="{{staticdir}}assets/dash/feather-icons/feather.min.js"></script>
+    <script src="{{staticdir}}assets/dash/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    {% block content%}
+    {% endblock%}
+</body>
+
+</html>

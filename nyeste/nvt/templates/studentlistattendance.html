@@ -1,0 +1,54 @@
+{% extends 'admindash.html'%}
+{% load static %}
+{% get_static_prefix as staticdir %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    .table{
+        background-color: rgb(146, 224, 185);
+        color: rgb(22, 20, 20);
+    }
+    </style>
+
+</head>
+<body>
+
+    <div class="table-responsive">
+    <table class="table table-responsive ">
+      <thead>
+
+        <tr>
+            <th></th>
+          <th scope="col">Student</th>
+          <th scope="col">Course</th>
+          <th scope="col">Change Attendance to</th>
+          <th scope="col">Current Stats</th>
+          <th></th>
+
+
+        </tr>
+      </thead>
+      <tbody>
+          {% for i in attendance %}
+          <tr>
+              <td></td>
+              <td>{{i.student.user.profile}}</td>
+              <td>{{i.student.course}}</td>
+              {% if i.status == 'Absent' %}
+              <td><a href="{%url 'present' i.id %}"><button class= "btn" style="background-color:rgb(18, 140, 1);color:white;">Present</button></a></td>
+              {% else %}
+              <td><a href="{%url 'absent' i.id %}"><button class= "btn" style="background-color:rgb(128, 6, 6);color:white;">Absent</button></a></td>
+              {% endif%}
+              <td>{{i.status}}</td>
+
+          </tr>
+          {% endfor %}
+
+    </table>
+</div>
+</body>
+</html>
+{% endblock%}

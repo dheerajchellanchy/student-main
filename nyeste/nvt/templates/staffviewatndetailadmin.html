@@ -1,0 +1,39 @@
+{% extends 'admindash.html'%}
+{% load static %}
+{% get_static_prefix as staticdir %}
+{% block content %}
+<style>
+
+table {
+  table-layout: fixed;
+} 
+</style>
+<div class="table-responsive ">
+    <table class="table table-borderless mb-0">
+      <thead>
+        <tr>
+          <th>BATCH NAME</th>
+          <th>TOPIC COVERED</th>
+          <th>FROM</th>
+          <th>TO</th>
+          <th>UPDATED TIME</th>
+        </tr>
+      </thead>
+      
+      <tbody>
+        {%for i in details %}
+        <tr>
+          <td class="text-bold-500ll"><strong>{{i.studentname}}</strong></td>
+          <td >{{i.works}}</td>
+          <td class="text-bold-500">{{i.timefrom}}</td>
+          <td>{{i.timeto}}</td>
+          <td>{{i.uptime}}</td>
+          {%endfor%}
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

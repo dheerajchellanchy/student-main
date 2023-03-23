@@ -1,0 +1,62 @@
+{% extends 'staffdashtemplate.html'%}
+{% load static %}
+{% get_static_prefix as staticdir %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+{% block content %}
+
+<body>
+    
+
+    <table class="table">
+        <thead>
+          <tr>
+              <th></th>
+            <th scope="col">Date</th>
+            <th scope="col">Status</th>
+            <th scope="col">Time</th>
+            <th></th>
+          </tr>
+        </thead>
+       
+            {% for i in atn %}
+            <tr>
+                <td></td>
+                <td>{{i.date}}</td>
+                {% if i.status == "Leave" %}
+                <td style="color: rgb(240, 20, 20);">{{i.status}}</td>
+                <td style="color: crimson;">Leave</td>
+                <td><button class= "btn btn-danger" style="width: 130px;">Leave</button></td>
+                {%else%}
+                {% if i.status == "Holliday" %}
+                <td style="color: rgb(240, 20, 20);">{{i.status}}</td>
+                <td style="color: crimson;">Holliday</td>
+                <td><button class= "btn btn-danger" style="width: 130px;">Holliday</button></td>
+                {%else%}
+                {% if i.completed == 1 %}
+                
+                <td>{{i.status}}</td>
+                <td>{{i.time}}</td>
+                <td><a href="{%url 'workadd' i.id %}"><button class= "btn btn-success" style="width: 130px;">saved</button></a></td>
+                {% else %}
+                <td>{{i.status}}</td>
+                <td>{{i.time}}</td>
+                <td><a href="{%url 'workadd' i.id %}"><button class= "btn btn-warning" style="width: 130px;">Pending</button></a></td>
+                {% endif%}
+                {% endif%}
+                {% endif%}
+                
+                
+            </tr>
+            {% endfor %}
+      </table>
+      {% endblock %}     
+</body>
+</html>

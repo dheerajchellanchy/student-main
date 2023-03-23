@@ -1,0 +1,47 @@
+from django.urls import path
+from . import views
+from django.contrib.auth import views as auth_views
+
+urlpatterns = [
+    path('', views.home, name="home"),
+    path('login', views.login, name='login'),
+    path('admindash', views.admindash, name='admindash'),
+    path('addstudent', views.addstudent, name='addstudent'),
+    path('viewstudent', views.viewstudent, name='viewstudent'),
+    path('addstaff', views.addstaff, name='addstaff'),
+    path('viewstaff', views.viewstaff, name='viewstaff'),
+    path('addteacher', views.addteacher, name='addteacher'),
+    path('viewteacher', views.viewteacher, name='viewteacher'),
+    path('addparent', views.addparent, name='addparent'),
+    path('viewparent', views.viewparent, name='viewparent'),
+    path('addannouncement', views.addannouncement, name='addannouncement'),
+    path('viewannouncement', views.viewannouncement, name='viewannouncement'),
+    path('leave', views.leave, name='leave'),
+    path('adminviewleaverequest', views.adminviewleaverequest, name='adminviewleaverequest'),
+    path('adminviewleavehistory', views.adminviewleavehistory, name='adminviewleavehistory'),
+    path('adminviewleavedetailed<str:pk>', views.adminviewleavedetailed, name='adminviewleavedetailed'),
+    path('studentlistattendance', views.studentlistattendance, name='studentlistattendance'),
+    path('present<str:pk>', views.present, name='present'),
+    path('absent<str:pk>', views.absent, name='absent'),
+    path('listattendance', views.listattendance, name='listattendance'),
+    path('adminviewattendancedetail<str:e>', views.adminviewattendancedetail, name='adminviewattendancedetail'),
+    path('viewatn', views.viewattendance, name='viewatn'),
+    path('addmarksheet', views.addmarksheet, name='addmarksheet'),
+    path('viewmarksheet<str:pk>', views.viewmarksheet, name='viewmarksheet'),
+    path('viewstudentmarksheet<str:pk>', views.viewstudentmarksheet, name='viewstudentmarksheet'),
+    path('addreference', views.addreference, name='addreference'),
+    path('viewreferences', views.viewreferences, name='viewreferences'),
+    path('logout', views.logoutuser, name="logout"),
+
+    path('studentedit<str:pk>', views.studentedit, name='studentedit'),
+    path('staffedit<str:pk>', views.staffedit, name='staffedit'),
+    path('teacheredit<str:pk>', views.teacheredit, name='teacheredit'),
+    path('parentedit<str:pk>', views.parentedit, name='parentedit'),
+
+    path('studentdelete<str:pk>', views.studentdelete, name='studentdelete'),
+    path('staffdelete<str:pk>', views.staffdelete, name='staffdelete'),
+    path('parentdelete<str:pk>', views.parentdelete, name='parentdelete'),
+    path('teacherdelete<str:pk>', views.teacherdelete, name='teacherdelete'),
+    path('parentviewleavehistory', views.parentviewleavehistory, name='parentviewleavehistory'),
+    path('viewallmarksheet', views.viewallmarksheet, name='viewallmarksheet'),
+]

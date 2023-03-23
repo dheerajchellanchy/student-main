@@ -1,0 +1,57 @@
+{% extends 'admindash.html'%}
+{% load static %}
+{% get_static_prefix as staticdir %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    .table{
+        background-color: rgb(146, 224, 185);
+        color: rgb(22, 20, 20);
+    }
+    </style>
+
+</head>
+<body>
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            
+    <form action="" method="POST">
+        {% csrf_token %} 
+    <div class="input-group mb-3">
+            <input type="search" class="form-control m-2"
+                placeholder="YYYY-MM-DD" name="value">
+
+            <button class="btn btn-outline-secondary m-2" type="submit">Search</button>
+    </div>
+    </form>
+        </div>
+        <h3>Total Working Days :    {{atn.count}} 
+            <br>
+            Leave Taken :   {{leavec.count}}  </h3>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+            <th></th>
+          <th scope="col">Date</th>
+          <th scope="col">Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for i in atn %}
+          <tr>
+              <td></td>
+              <td>{{i.date}}</td>
+              <td>{{i.status}}</td>
+          </tr>
+          {% endfor %}
+    </table>
+      
+</body>
+</html>
+
+{% endblock%}

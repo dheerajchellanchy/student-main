@@ -1,0 +1,139 @@
+{% extends 'admindash.html'%}
+{% load static%}
+
+
+{% block content %}
+
+<div class="main-content container-fluid">
+    <div class="page-title">
+        <h3>Dashboard</h3>
+    </div>
+    <section class="section">
+        <div class="row mb-2 mt-4 ">
+            <div class="col-12 col-md-4">
+                <div class="card card-statistic" >
+                    <div class="card-body p-0" >
+                        <div class="d-flex flex-column">
+                            <div class='px-3 py-3 d-flex justify-content-between'>
+                                <h3 class='card-title'>Total Students</h3>
+                                <div class="card-right d-flex align-items-center">
+                                    <p>{{student_count.count}} </p>
+                                </div>
+                            </div>
+                            <div class="chart-wrapper">
+                                <canvas id="canvas1" style="height:100px !important"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="card card-statistic">
+                    <div class="card-body p-0">
+                        <div class="d-flex flex-column">
+                            <div class='px-3 py-3 d-flex justify-content-between'>
+                                <h3 class='card-title'>Total Staff</h3>
+                                <div class="card-right d-flex align-items-center">
+                                    <p> {{staff.count}} </p>
+                                </div>
+                            </div>
+                            <div class="chart-wrapper">
+                                <canvas id="canvas2" style="height:100px !important"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="card card-statistic">
+                    <div class="card-body p-0">
+                        <div class="d-flex flex-column">
+                            <div class='px-3 py-3 d-flex justify-content-between'>
+                                <h3 class='card-title'>Leave REQUESTS</h3>
+                                <div class="card-right d-flex align-items-center">
+                                    {% if leave.count > 0 %}
+                                    <h3 style="color: red;" >{{leave.count}} </h3>
+                                    {%else%}
+                                    <p>{{leave.count}} </p>
+                                    {%endif%}
+                                </div>
+                            </div>
+                            <div class="chart-wrapper">
+                                <canvas id="canvas3" style="height:100px !important"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+            <section class="section">
+        <div class="row mb-2 mt-4 ">
+            <div class="col-12 col-md-4">
+                <div class="card card-statistic">
+                    <div class="card-body p-0">
+                        <div class="d-flex flex-column">
+                            <div class='px-3 py-3 d-flex justify-content-between'>
+                                <h3 class='card-title'>Total Teachers</h3>
+                                <div class="card-right d-flex align-items-center">
+                                    <p>{{teacher.count}} </p>
+                                </div>
+                            </div>
+                            <div class="chart-wrapper">
+                                <canvas id="canvas1" style="height:100px !important"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="card card-statistic">
+                    <div class="card-body p-0">
+                        <div class="d-flex flex-column">
+                            <div class='px-3 py-3 d-flex justify-content-between'>
+                                <h3 class='card-title'>Total Parents</h3>
+                                <div class="card-right d-flex align-items-center">
+                                    <p> {{admin.count}} </p>
+                                </div>
+                            </div>
+                            <div class="chart-wrapper">
+                                <canvas id="canvas2" style="height:100px !important"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="card card-statistic">
+                    <div class="card-body p-0">
+                        <div class="d-flex flex-column">
+                            <div class='px-3 py-3 d-flex justify-content-between'>
+                                <h3 class='card-title'>Announcements</h3>
+                                <div class="card-right d-flex align-items-center">
+                                    <p>{{request.user.profile.role}} </p>
+                                </div>
+                            </div>
+                            <div class="chart-wrapper">
+                                <canvas id="canvas3" style="height:100px !important"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+<footer>
+    <div class="footer clearfix mb-0 text-muted fixed-bottom">
+        <div class="float-start">
+            <p>2023 &copy; UIT Ittiva</p>
+        </div>
+        <div class="float-end">
+            <p style="margin-right:10px">Crafted <span class='text-danger'><i data-feather="heart"></i></span> by <a class="color-dark"
+                    href="">Dheeraj</a></p>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+{% endblock%}

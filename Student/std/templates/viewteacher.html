@@ -1,0 +1,254 @@
+{% extends 'admindash.html'%}
+{% load static %}
+{% get_static_prefix as staticdir %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" ></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" ></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<style>
+    .table{
+        background-color: rgb(146, 224, 185);
+        color: rgb(22, 20, 20);
+    }
+    body{
+    background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+}
+.emp-profile{
+    padding: 3%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    border-radius: 0.5rem;
+    background: #fff;
+}
+.profile-img{
+    text-align: center;
+}
+.profile-img img{
+    width: 70%;
+    height: 100%;
+}
+.profile-img .file {
+    position: relative;
+    overflow: hidden;
+    margin-top: -20%;
+    width: 70%;
+    border: none;
+    border-radius: 0;
+    font-size: 15px;
+    background: #212529b8;
+}
+.profile-img .file input {
+    position: absolute;
+    opacity: 0;
+    right: 0;
+    top: 0;
+}
+.profile-head h5{
+    color: #333;
+}
+.profile-head h6{
+    color: #0062cc;
+}
+.profile-edit-btn{
+    border: none;
+    border-radius: 1.5rem;
+    width: 70%;
+    padding: 2%;
+    font-weight: 600;
+    color: #6c757d;
+    cursor: pointer;
+}
+.proile-rating{
+    font-size: 12px;
+    color: #818182;
+    margin-top: 5%;
+}
+.proile-rating span{
+    color: #495057;
+    font-size: 15px;
+    font-weight: 600;
+}
+.profile-head .nav-tabs{
+    margin-bottom:5%;
+}
+.profile-head .nav-tabs .nav-link{
+    font-weight:600;
+    border: none;
+}
+.profile-head .nav-tabs .nav-link.active{
+    border: none;
+    border-bottom:2px solid #0062cc;
+}
+.profile-work{
+    padding: 14%;
+    margin-top: -15%;
+}
+.profile-work p{
+    font-size: 12px;
+    color: #818182;
+    font-weight: 600;
+    margin-top: 10%;
+}
+.profile-work a{
+    text-decoration: none;
+    color: #495057;
+    font-weight: 600;
+    font-size: 14px;
+}
+.profile-work ul{
+    list-style: none;
+}
+.profile-tab label{
+    font-weight: 600;
+}
+.profile-tab p{
+    font-weight: 600;
+    color: #0062cc;
+}
+  
+</style>
+</head>
+<body>
+    <table class="table">
+
+          <tr>
+            
+            <th scope="col">Name</th>
+            <th scope="col">Subject Name</th>
+            <th scope="col">Joining Date</th>
+            <th scope="col">Phone Number</th>
+            <th></th>
+          </tr>
+
+        <tbody>
+
+        {% for e in staffs %}
+
+
+          <tr>
+            {%if e.status == "alive"%}
+            <td>{{e.name}}</td>
+            <td>{{e.subject.name}}</td>
+            <td>{{e.joining_date}}</td>
+            <td>{{e.mob}}</td>
+            <td> <button type="button" class="btn btn-outline-primary block" data-bs-toggle="modal"
+                data-bs-target="#modal{{e.id}}">
+                view
+            </button></td>
+            <td><a href="{%url 'teacheredit' e.id %}"><button class="btn btn-outline-primary block">Edit</button></a></td>
+             <td><a href="{%url 'teacherdelete' e.id %}"><button class="btn btn-outline-danger block">Delete</button></a></td>
+              <div class="modal fade text-left" id="modal{{e.id}}" tabindex="-1" role="dialog"
+                                        aria-labelledby="myModalLabel1" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered modal-dialog-centered " role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header " >
+                                                    <h5 class="modal-title" id="myModalLabel1">{{e.name|capfirst}}</h5>
+                                                    <button type="button" class="close rounded-pill"
+                                                        data-bs-dismiss="modal" aria-label="Close">
+                                                        <i data-feather="x"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+
+                                                    <section id="basic-horizontal-layouts">
+                                                        <div class="row match-height">
+
+                                                            <div class="card">
+                                                                <h4 class="card-title text-center">
+                                                                    <img style="max-width: 100px;max-width: 100px;" src="{{e.profile_picture.url}}" alt="Profile picture"></h4>
+                                                                </div>
+                                                                <div class="card-content">
+                                                                <div class="card-body">
+                                                                    <form class="form form-horizontal">
+                                                                    <div class="form-body">
+                                                                        <div class="row">
+                                                                        <div class="col-md-4">
+                                                                            <label>Name</label>
+                                                                        </div>
+                                                                        <div class="col-md-8 form-group">
+                                                                            {{e.name|capfirst}}
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                          <label>Subject Name</label>
+                                                                      </div>
+                                                                      <div class="col-md-8 form-group">
+                                                                          {{e.subject.name}}
+                                                                      </div>
+                                                                        <div class="col-md-4">
+                                                                            <label>Email</label>
+                                                                        </div>
+                                                                        <div class="col-md-8 form-group">
+                                                                           {{e.user.email}}
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label>Mobile</label>
+                                                                        </div>
+                                                                        <div class="col-md-8 form-group">
+                                                                           {{e.mob}}
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label>Date Of Birth</label>
+                                                                        </div>
+                                                                        <div class="col-md-8 form-group">
+                                                                           {{e.dob}}
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <label>Joining Date </label>
+                                                                        </div>
+                                                                        <div class="col-md-8 form-group">
+                                                                           {{e.joining_date}}
+                                                                        </div>
+
+                                                                    </div>
+                                                                    </form>
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">
+                                                        Close
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            </tr>
+          {%endif%}
+         {%endfor%}
+        </tbody>
+      </table>
+    
+</body>
+<script>
+  function deletefn()
+  {
+      var del=confirm("Are you sure want to delete?");
+      if(del == true)
+      {
+          return true;
+      }
+      else
+      {
+          alert("Cancelled");
+          return false;
+      }
+  }
+</script>
+</html>
+{% endblock%}

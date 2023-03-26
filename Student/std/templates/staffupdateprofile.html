@@ -1,0 +1,64 @@
+{% load static %}
+{% get_static_prefix as staticdir %}
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" href="{{staticdir}}assets/css/stafflogin.css">
+<style>
+    select{
+        border-radius: 110px;
+    }
+    
+    
+</style>
+</head>
+<body style="background-color: rgb(240, 236, 236)">
+  
+
+<section class="h-100 gradient-form" style="background-color: rgb(240, 236, 236)">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-xl-10">
+          <div class="card rounded-3 text-black">
+            <div class="row g-0">
+              <div class="col-lg-6">
+                <div class="card-body p-md-5 mx-md-4">
+  
+                  <div class="text-center">
+                    <img src="{{staticdir}}assets/images/nyestelogo.png" style="width: 185px;" alt="logo">
+                    <h4 class="mt-1 mb-5 pb-1">We are The Team</h4>
+                  </div>
+  
+                  <form action="" method="POST" enctype="multipart/form-data">
+                    {%csrf_token%}
+                    <p></p>
+                    {{form.as_p}}
+                    <br>
+                    <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">SignUp</button>
+                  </form>
+
+  
+                </div>
+              </div>
+              <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                  <h4 class="mb-4">We are more than just a company</h4>
+                  <p class="small mb-0">We have set ourselves the goal of creating the overall conditions for a successful work-life balance. That is why we are continuously expanding our range of employee benefits and creating attractive working environments. By offering a wide variety of extra benefits, we enable our employees to enjoy flexibility in their working lives.</p>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+            </div>
+            </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>

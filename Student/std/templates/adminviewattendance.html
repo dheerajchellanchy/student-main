@@ -1,0 +1,57 @@
+{% extends 'admindash.html'%}
+{% load static %}
+{% get_static_prefix as staticdir %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" ></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" ></script>
+<style>
+    .table{
+        background-color: rgb(146, 224, 185);
+        color: rgb(22, 20, 20);
+    }
+    .btn{
+        background-color: rgb(32, 219, 72);
+        color: white;
+    }
+</style>
+</head>
+<body>
+    <table class="table">
+
+          <tr>
+            
+            <th scope="col">Name</th>
+            <th scope="col">Office</th>
+            <th scope="col">Language</th>
+            
+            <th></th>
+          </tr>
+     
+        <tbody>
+            
+            {% for e in emp %}
+         
+            
+          <tr>
+            {%if e.status == "alive" %}
+            <td>{{e.name}}</td>
+            <td>{{e.office}}</td>
+            <td>{{e.language}}</td>
+            
+            <td><a href="{%url 'adminviewattendancedetail' e.id %}"><button class="btn">View Attendance</button></td></a>
+          </tr>
+          {%endif%}
+         {%endfor%}
+        </tbody>
+      </table>
+    
+</body>
+</html>
+{% endblock%}

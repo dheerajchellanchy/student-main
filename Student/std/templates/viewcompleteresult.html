@@ -1,0 +1,62 @@
+{% extends 'admindash.html'%}
+{% load static %}
+{% get_static_prefix as staticdir %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    .table{
+        background-color: rgb(146, 224, 185);
+        color: rgb(22, 20, 20);
+    }
+    </style>
+
+</head>
+<body>
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+
+    <form action="" method="POST">
+        {% csrf_token %}
+    <div class="input-group mb-3">
+            <input type="search" class="form-control m-2"
+                placeholder="Course" name="course">
+      <input type="search" class="form-control m-2"
+                placeholder="Semester" name="semester">
+
+            <button class="btn btn-outline-secondary m-2" type="submit">Search</button>
+    </div>
+    </form>
+        </div>
+    </div>
+<table class="table">
+          <tr>
+            <th scope="col">Student</th>
+            <th scope="col">Course</th>
+            <th scope="col">Semester</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Mark</th>
+            <th scope="col">Date Of Exam</th>
+            <th scope="col">Result Published On</th>
+            <th></th>
+          </tr>
+        <tbody>
+        {% for mark in marks %}
+          <tr>
+            <td>{{mark.student}}</td>
+            <td>{{mark.course}}</td>
+            <td>{{mark.semester}}</td>
+            <td>{{mark.subject}}</td>
+            <td>{{mark.mark}}</td>
+            <td>{{mark.date_of_exam}}</td>
+            <td>{{mark.created_at}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+
+{% endblock%}

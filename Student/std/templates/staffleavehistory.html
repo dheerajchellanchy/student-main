@@ -1,0 +1,62 @@
+
+{% extends 'staffdashtemplate.html'%}
+{% load static %}
+{% get_static_prefix as staticdir %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    
+    .btn{
+      min-width: 150px;
+    }
+    </style>
+
+</head>
+<body>
+  
+  
+    <table class="table">
+      <thead>
+      
+        <tr>
+        
+          <th></th>
+          <th scope="col">Staff</th>
+          <th scope="col">Date</th>
+          <th scope="col">No of Days</th>
+          <th></th>
+        
+         
+        </tr>
+      </thead>
+      <tbody>
+          {% for i in leaves %}
+          <tr>
+
+    
+              <td></td>
+              <td>{{i.emp}}</td>
+              <td>{{i.date}}</td>
+              <td>{{i.days}}</td>
+              {%if i.status == 'requested'%}
+              <td><a href="{%url 'staffviewleavedetailed' i.id %}"><button class= "btn" style="background-color:rgb(76, 139, 13);color:white;">Requested</button></a></td>
+              {%endif%}
+              {%if i.status == 'accepted'%}
+              <td><a href="{%url 'staffviewleavedetailed' i.id %}"><button class= "btn" style="background-color:rgb(76, 139, 13);color:white;">Aproved</button></a></td>
+              {%endif%}
+              {%if i.status == 'declined'%}
+              <td><a href="{%url 'staffviewleavedetailed' i.id %}"><button class= "btn" style="background-color:rgb(240, 8, 8);color:white;">Declined</button></a></td>
+              {%endif%}
+              
+              
+          </tr>
+          {% endfor %}
+          
+    </table>
+  </div>
+</body>
+</html>
+
+{% endblock%}

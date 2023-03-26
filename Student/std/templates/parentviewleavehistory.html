@@ -1,0 +1,60 @@
+{% extends 'admindash.html'%}
+{% load static %}
+{% get_static_prefix as staticdir %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    .table{
+        background-color: rgb(146, 224, 185);
+        color: rgb(22, 20, 20);
+    }
+    </style>
+
+</head>
+<body>
+
+    <div class="table-responsive">
+    <table class="table table-responsive ">
+      <thead>
+
+        <tr>
+            <th></th>
+          <th scope="col">Student</th>
+          <th scope="col">Requested By</th>
+          <th scope="col">Date</th>
+          <th scope="col">No of Days</th>
+          <th></th>
+
+
+        </tr>
+      </thead>
+      <tbody>
+          {% for i in leaves %}
+          <tr>
+            {%if i.status != 'requested'%}
+
+              <td></td>
+              <td>{{i.student.profile}}</td>
+              <td>{{i.send_by.profile}}</td>
+              <td>{{i.date}}</td>
+              <td>{{i.days}}</td>
+
+              {%if i.status == 'accepted'%}
+              <td><a href="{%url 'adminviewleavedetailed' i.id %}"><button class= "btn" style="background-color:rgb(76, 139, 13);color:white;">Aproved</button></a></td>
+              {%endif%}
+              {%if i.status == 'declined'%}
+              <td><a href="{%url 'adminviewleavedetailed' i.id %}"><button class= "btn" style="background-color:rgb(240, 8, 8);color:white;">Declined</button></a></td>
+              {%endif%}
+              {%endif%}
+
+          </tr>
+          {% endfor %}
+
+    </table>
+</div>
+</body>
+</html>
+
+{% endblock%}

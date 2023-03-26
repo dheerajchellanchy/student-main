@@ -1,0 +1,68 @@
+{% extends 'staffdashtemplate.html'%}
+{% load static %}
+{% get_static_prefix as staticdir %}
+{% block content %}
+<section class="vh-100">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 15px;background-color:rgb(240, 236, 236);">
+            <div class="card-body p-4 text-black">
+              <div>
+                <h4 class="mb-4">Request For Leave</h4>
+                <hr>
+                <div class="d-flex align-items-center justify-content-between mb-1">
+                  <b><h4>{{details.emp.name}}</h4></b>
+                  <!-- <p class="fw-bold mb-0">$90</p> -->
+                </div>
+              </div>
+              <div class="d-flex align-items-center mb-4">
+                <div class="flex-shrink-0">
+                  <img src="{{details.emp.profile_picture.url}}" alt="Generic placeholder image" class="img-fluid rounded-circle border border-dark border-3" style="width: 70px;">
+                </div>
+                <div class="flex-grow-1 ms-3">
+                  <div class="d-flex flex-row align-items-center mb-2">
+                  
+                    <ul class="mb-0 list-unstyled d-flex flex-row" style="color: #1B7B2C;">
+                      <li>
+                        <i class="fas fa-star fa-xs"></i>
+                      </li>
+                      <li>
+                        <i class="fas fa-star fa-xs"></i>
+                      </li>
+                      <li>
+                        <i class="fas fa-star fa-xs"></i>
+                      </li>
+                      <li>
+                        <i class="fas fa-star fa-xs"></i>
+                      </li>
+                      <li>
+                        <i class="fas fa-star fa-xs"></i>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <button  class="btn btn-dark m-2">{{details.date}}</button>
+                    <b>to</b>
+                    <button  class="btn btn-dark m-3" >{{details.days}}  days</button>
+        
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <h4>Reson</h4>
+              <p class="my-4 pb-1">{{details.reson}}</p>
+              <hr>
+              {%if details.status == "declined"%}
+              <h4>Reson for Rejection</h4>
+              <p class="my-4 pb-1">{{details.adminreson}}</p>
+              {%endif%}
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </section>
+{%endblock%}

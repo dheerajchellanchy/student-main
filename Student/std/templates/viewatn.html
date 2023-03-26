@@ -1,0 +1,59 @@
+{% extends 'admindash.html'%}
+{% load static %}
+{% get_static_prefix as staticdir %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        button{
+            width: 100px;
+            
+        }
+    </style>
+</head>
+{% block content %}
+<body>
+    
+  <div class="row">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6">
+        
+<form action="" method="POST">
+    {% csrf_token %} 
+<div class="input-group mb-3">
+        <input type="search" class="form-control m-2"
+            placeholder="YYYY-MM-DD" name="value">
+        <button class="btn btn-outline-secondary m-2" type="submit">Search</button>
+</div>
+</form>
+    </div>
+</div>
+<h3 class="ml-5 "> Leave  {{leavec.count}} Days</h3>
+    <table class="table" >
+        <thead>
+          <tr>
+              <th></th>
+            <th scope="col">Date</th>
+            <th scope="col">Status</th>
+            <th scope="col">Marked By</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for i in atn %}
+            <tr>
+                <td></td>
+                <td>{{i.date}}</td>
+                <td>{{i.status}}</td>
+                <td>{{i.updated_by.first_name}}</td>
+            </tr>
+            {% endfor %}
+      </table>
+      {% endblock %}     
+</body>
+</html>

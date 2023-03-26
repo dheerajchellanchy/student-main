@@ -1,0 +1,62 @@
+{% extends 'admindash.html'%}
+{% load static %}
+{% get_static_prefix as staticdir %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    .table{
+        background-color: rgb(146, 224, 185);
+        color: rgb(22, 20, 20);
+    }
+    </style>
+
+</head>
+<body>
+  
+    <div class="table-responsive">
+    <table class="table table-responsive ">
+      <thead>
+        
+        {%if abc == 1 %}
+      
+        <tr>
+            <th></th>
+          <th scope="col">Student Name</th>
+          <th scope="col">Requested By</th>
+          <th scope="col">Date</th>
+          <th scope="col">No of Days</th>
+          <th></th>
+          {%else%}
+          <td></td>
+          <td></td>
+          <td><h3 style="color: green;"> Don't have any Leave requests</h3><td>
+       
+            {%endif%}
+          
+          
+        </tr>
+      </thead>
+      <tbody>
+          {% for i in leaves %}
+          <tr>
+              {%if i.status == 'requested'%}
+              <td></td>
+              <td>{{i.student.name}}</td>
+              <td>{{i.send_by.profile}}</td>
+              <td>{{i.date}}</td>
+              <td>{{i.days}}</td>
+              <td><a href="{%url 'adminviewleavedetailed' i.id %}"><button class= "btn" style="background-color: rgb(212, 127, 16);color:white;">Pending</button></a></td>
+        
+              {%endif%}
+              
+          </tr>
+          {% endfor %}
+          
+    </table>
+</div>
+</body>
+</html>
+
+{% endblock%}
